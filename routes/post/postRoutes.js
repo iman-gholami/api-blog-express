@@ -42,7 +42,7 @@ postRouter.delete('/:id' ,(req, res)=>{
     try {
         res.json({
             status: "success" ,
-            data : "create post routes"
+            data : "delete post routes"
         })
     }catch(err){
         res.json(err.message)

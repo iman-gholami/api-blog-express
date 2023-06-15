@@ -2,6 +2,7 @@ const express = require('express');
 const userRouter = require('./routes/user/userRoutes')
 const postRoutes = require('./routes/post/postRoutes')
 const categoryRoutes = require('./routes/categories/categoryRoutes')
+const commentsRoutes = require('./routes/comment/commentRoutes')
 require('dotenv').config();
 // require('./config/DbConnect');
 
@@ -17,7 +18,7 @@ app.use('/api/v1/posts' , postRoutes);
 
 app.use('/api/v1/category' , categoryRoutes) ;
 
-
+app.use('/api/v1/comments' , commentsRoutes);
 
 
 
