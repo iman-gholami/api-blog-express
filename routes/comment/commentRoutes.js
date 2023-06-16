@@ -3,7 +3,7 @@ const express = require('express');
 const commentsRoutes = express.Router()
 
 
-commentsRoutes.get('/:id' ,(req, res)=>{
+commentsRoutes.get('/:id' ,async (req, res)=>{
     try {
         res.json({
             status: "success" ,

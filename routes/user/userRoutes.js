@@ -1,4 +1,11 @@
 const express = require('express');
+const {userLoinCtrl ,
+    userRegisterCtrl ,
+    userCtrl ,
+    userDeletCtrl ,
+    userUpdateCtrl, userProfieleCtrl, userLoginCtrl
+} = require('../../controller/user/userCtrl');
+
 
 
 const userRouter = express.Router();
@@ -6,75 +13,19 @@ const userRouter = express.Router();
 
 
 
-userRouter.post('/register' , (req, res) => {
-    try {
-        res.json({
-            status : 'success',
-            data : "user registered successfully"
-        });
-    }catch (err) {
-        res.json(error.message);
-    }
-});
+userRouter.post('/register' ,userRegisterCtrl );
 
-userRouter.post('/login', (req, res) => {
-    try {
-        res.json({
-            status : 'success',
-            data : "user logged in successfully"
-        });
-    }catch (err) {
-        res.json(error.message);
-    }
-})
+userRouter.post('/login',userLoginCtrl ) ;
 
-userRouter.get('/profile/:id' , (req, res)=>{
-    try {
-        res.json({
-            status : "sucsess" ,
-            data : "profiel route"
-        });
-    }catch (error){
-        res.json(error.message)
-    }
-})
+userRouter.get('/profile/:id' ,userProfieleCtrl )
 
 
-userRouter.get('/' , (req, res) => {
-    try {
-        res.json({
-            status : 'success',
-            data : "alll user route"
-        });
-    }catch (err) {
-        res.json(err.message)
-    }
-})
+userRouter.get('/' ,userCtrl )
 
 
-userRouter.delete('/:id' , (req, res)=>{
+userRouter.delete('/:id' ,userDeletCtrl )
 
-    try {
-        res.json({
-            status : "sucsess" ,
-            data : "delet user route "
-        });
-    }catch (err){
-        res.json(err.message)
-    }
-
-})
-
-userRouter.put('/:id' , (req, res)=>{
-    try {
-        res.json({
-            status : "sucsess" ,
-            data : "update user route"
-        });
-    }catch (error){
-        res.json(error.message)
-    }
-})
+userRouter.put('/:id' ,userUpdateCtrl )
 
 
 
