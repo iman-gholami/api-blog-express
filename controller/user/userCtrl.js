@@ -1,9 +1,10 @@
 //user registration
 const userRegisterCtrl = async (req, res) => {
+    console.log(req.body);
     try {
         res.json({
             status : 'success',
-            data : "user registered successfully"
+            data : "user registered successfullyi"
         });
     }catch (err) {
         res.json(error.message);
@@ -60,6 +61,8 @@ const userDeletCtrl = async (req, res)=>{
 //update user
 
 const userUpdateCtrl = async (req, res)=>{
+    const {firstname , lastname , email , password} = req.body
+
     try {
         res.json({
             status : "sucsess" ,

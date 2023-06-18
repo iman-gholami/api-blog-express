@@ -1,13 +1,18 @@
 const express = require('express');
+
+
 const userRouter = require('./routes/user/userRoutes')
 const postRoutes = require('./routes/post/postRoutes')
 const categoryRoutes = require('./routes/categories/categoryRoutes')
 const commentsRoutes = require('./routes/comment/commentRoutes')
 require('dotenv').config();
-// require('./config/DbConnect');
+require('./config/DbConnect');
 
 
 const app = express();
+
+
+app.use(express.json());
 
 
 
