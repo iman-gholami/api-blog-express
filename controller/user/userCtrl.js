@@ -1,6 +1,7 @@
 //user registration
 const userRegisterCtrl = async (req, res) => {
-    console.log(req.body);
+        const {firstname , lastname , email , password} = req.body
+
     try {
         res.json({
             status : 'success',
