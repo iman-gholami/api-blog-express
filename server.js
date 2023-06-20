@@ -1,6 +1,7 @@
 const express = require('express');
 
 
+
 const userRouter = require('./routes/user/userRoutes')
 const postRoutes = require('./routes/post/postRoutes')
 const categoryRoutes = require('./routes/categories/categoryRoutes')

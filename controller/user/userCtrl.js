@@ -1,26 +1,63 @@
+const User = require('../../model/User/User')
+const bcrypt = require('bcrypt')
+
 //user registration
 const userRegisterCtrl = async (req, res) => {
         const {firstname , lastname , email , password} = req.body
 
+
+
     try {
+            const userFound  = await User.findOne({email})
+            if (userFound){
+                return res.json({
+                    msg : "This user is already exists"
+                })
+            }
+            const saltRounds = 10;
+            const hashPassword = await bcrypt.hash(password , saltRounds)
+
+
+            const user = await User.create({
+                firstname ,
+                lastname ,
+                email ,
+                password : hashPassword
+            })
         res.json({
             status : 'success',
-            data : "user registered successfullyi"
+            data : user ,
         });
     }catch (err) {
-        res.json(error.message);
+        res.json(err.message);
     }
 }
 
 //user login
 const userLoginCtrl = async (req, res) => {
+    const {email , password} = req.body
     try {
+        const userFound = await User.findOne({email})
+        if (!userFound) {
+            res.json({
+                msg: "wrong email"
+            });
+        }
+
+        const userisPassword = await User.findOne({password})
+        if (!userisPassword){
+            res.json({
+                msg : "wrong pass "
+            })
+        }
+
+
         res.json({
             status : 'success',
             data : "user logged in successfully"
         });
     }catch (err) {
-        res.json(error.message);
+        res.json(err.msg);
     }
 }
 //user profile
