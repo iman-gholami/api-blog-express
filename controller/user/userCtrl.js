@@ -37,19 +37,27 @@ const userRegisterCtrl = async (req, res) => {
 const userLoginCtrl = async (req, res) => {
     const {email , password} = req.body
     try {
+        //check if email is existing
         const userFound = await User.findOne({email})
-        if (!userFound) {
-            res.json({
-                msg: "wrong email"
-            });
-        }
 
-        const userisPassword = await User.findOne({password})
-        if (!userisPassword){
-            res.json({
-                msg : "wrong pass "
+        if (!userFound ) {
+            return res.json({
+                msg : "invalid login credentials"
             })
         }
+
+
+
+        //verify password matches ;
+
+        const isPasswordMatched = await bcrypt.compare(password, userFound.password);
+
+        if ( !isPasswordMatched) {
+            return res.json({
+                msg : "invalid login credentials"
+            })
+        }
+
 
 
         res.json({
