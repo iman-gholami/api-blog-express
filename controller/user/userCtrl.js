@@ -70,6 +70,7 @@ const userLoginCtrl = async (req, res) => {
 }
 //user profile
 const userProfieleCtrl = async (req, res)=>{
+    console.log(req.params)
     try {
         res.json({
             status : "sucsess" ,
