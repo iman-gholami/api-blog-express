@@ -2,6 +2,8 @@ const User = require('../../model/User/User')
 const bcrypt = require('bcrypt')
 const generateTokne = require('../../utils/generateToken') ;
 
+const getTokenFromHeaders = require("../../utils/getTokenFromHeader")
+
 
 
 //user registration
@@ -84,9 +86,15 @@ const userLoginCtrl = async (req, res) => {
 //user profile
 const userProfieleCtrl = async (req, res)=>{
 
+
+
     const {id} = req.params
 
     try {
+
+        const token = getTokenFromHeaders(req)
+        console.log(token)
+
         const user = await User.findById(id)
         res.json({
             status : "sucsess" ,
