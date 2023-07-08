@@ -1,5 +1,8 @@
 const User = require('../../model/User/User')
 const bcrypt = require('bcrypt')
+const generateTokne = require('../../utils/generateToken') ;
+
+
 
 //user registration
 const userRegisterCtrl = async (req, res) => {
@@ -40,6 +43,7 @@ const userLoginCtrl = async (req, res) => {
         //check if email is existing
         const userFound = await User.findOne({email})
 
+
         if (!userFound ) {
             return res.json({
                 msg : "invalid login credentials"
@@ -60,9 +64,18 @@ const userLoginCtrl = async (req, res) => {
 
 
 
+
+
         res.json({
             status : 'success',
-            data : "user logged in successfully"
+            data : {
+                firstName : userFound.firstname ,
+                lastname : userFound.lastname ,
+                email : userFound.email ,
+                isAdmin : userFound.isAdmin ,
+                token : generateTokne(userFound._id) ,
+
+            }
         });
     }catch (err) {
         res.json(err.msg);
@@ -70,11 +83,14 @@ const userLoginCtrl = async (req, res) => {
 }
 //user profile
 const userProfieleCtrl = async (req, res)=>{
-    console.log(req.params)
+
+    const {id} = req.params
+
     try {
+        const user = await User.findById(id)
         res.json({
             status : "sucsess" ,
-            data : "profiel route"
+            data : user ,
         });
     }catch (error){
         res.json(error.message)
