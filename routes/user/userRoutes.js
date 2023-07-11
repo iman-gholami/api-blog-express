@@ -7,6 +7,9 @@ const {userLoinCtrl ,
 } = require('../../controller/user/userCtrl');
 
 
+const isLogin = require('../../middlewars/isLogin')
+
+
 
 const userRouter = express.Router();
 
@@ -15,9 +18,8 @@ const userRouter = express.Router();
 
 userRouter.post('/register' ,userRegisterCtrl );
 
-userRouter.post('/login',userLoginCtrl ) ;
-
-userRouter.get('/profile/:id' ,userProfieleCtrl )
+userRouter.post('/login', userLoginCtrl)
+userRouter.get('/profile/',isLogin ,userProfieleCtrl )
 
 
 userRouter.get('/' ,userCtrl )
